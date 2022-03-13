@@ -1,0 +1,37 @@
+- Nombre: Tarjetas Glo Move
+  # Puede fijar la confirmación exacta o la versión.
+  # usos: Axosoft/glo-action-move-card@e676e6f0589d83e0c55902e07397f269bedb804c
+  usos: Axosoft/glo-action-move-card@v1
+  con:
+    # token de autenticación para el usuario
+    token de autorización:
+    # Matriz de objetos { cardId, boardId }
+    tarjetas:
+    # Nombre de la columna a donde mover las cartas
+    columna:name: Makefile CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: configure
+      run: ./configure
+      
+    - name: Install dependencies
+      run: make
+      
+    - name: Run check
+      run: make check
+      
+    - name: Run distcheck
+      run: make distcheck
